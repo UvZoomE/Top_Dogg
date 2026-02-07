@@ -1,0 +1,218 @@
+[gd_scene load_steps=28 format=3 uid="uid://07g1n5d8ubfb"]
+
+[ext_resource type="Script" uid="uid://cihm0elab0lbf" path="res://game_loop.gd" id="1_lxk7w"]
+[ext_resource type="PackedScene" uid="uid://dyifswyvhn734" path="res://slingshot.tscn" id="1_u3r3m"]
+[ext_resource type="PackedScene" uid="uid://dyhksg8gcuvue" path="res://player.tscn" id="2_ksmgf"]
+[ext_resource type="Script" uid="uid://dd42b33noke2" path="res://CameraController.gd" id="3_ksmgf"]
+[ext_resource type="PackedScene" uid="uid://kick6tiupo2p" path="res://trampoline.tscn" id="3_mc7mr"]
+[ext_resource type="Texture2D" uid="uid://dhdj1qaomfua" path="res://parallax backgound pack/_02_trees and bushes.png" id="4_nbfos"]
+[ext_resource type="PackedScene" uid="uid://bcm4m8cbags8y" path="res://pot.tscn" id="4_q3nly"]
+[ext_resource type="Texture2D" uid="uid://b8n5syjuuxuv1" path="res://parallax backgound pack/_03_distant_trees.png" id="4_u6nhp"]
+[ext_resource type="Texture2D" uid="uid://b23rgej40e67t" path="res://parallax backgound pack/_01_ground.png" id="4_x7b5a"]
+[ext_resource type="PackedScene" uid="uid://bhn1dfllwbox3" path="res://coin.tscn" id="5_arced"]
+[ext_resource type="Texture2D" uid="uid://bmfxkxrwnofmv" path="res://parallax backgound pack/_11_background.png" id="6_akw1b"]
+[ext_resource type="Script" uid="uid://cjb30e6u1n5kj" path="res://sky_above.gd" id="6_pil3s"]
+[ext_resource type="Texture2D" uid="uid://cvpt7a5lppqkb" path="res://sky_above.png" id="6_wmlbd"]
+[ext_resource type="PackedScene" uid="uid://ccj0q1apdveom" path="res://spikey_balloon.tscn" id="6_xuo4s"]
+[ext_resource type="Texture2D" uid="uid://iuygj07p0q1k" path="res://parallax backgound pack/_10_distant_clouds.png" id="7_wmlbd"]
+[ext_resource type="Texture2D" uid="uid://t15l2d60rhsl" path="res://parallax backgound pack/_09_distant_clouds1.png" id="8_pil3s"]
+[ext_resource type="Texture2D" uid="uid://3a5t6ys6cv82" path="res://parallax backgound pack/_08_clouds.png" id="9_mc7mr"]
+[ext_resource type="PackedScene" uid="uid://cw4ryq3888lea" path="res://bomb.tscn" id="9_vfyqg"]
+[ext_resource type="Texture2D" uid="uid://cedw8vnphjsv0" path="res://parallax backgound pack/_07_huge_clouds.png" id="10_q3nly"]
+[ext_resource type="PackedScene" uid="uid://cfay6ew0i8bsm" path="res://score_tracker.tscn" id="10_v6ba6"]
+[ext_resource type="Texture2D" uid="uid://xwgjyt0txkhf" path="res://parallax backgound pack/_06_hill2.png" id="11_arced"]
+[ext_resource type="PackedScene" uid="uid://75o58kofwpo5" path="res://game_over.tscn" id="11_eufeh"]
+[ext_resource type="Texture2D" uid="uid://guu3ebtelrro" path="res://parallax backgound pack/_05_hill1.png" id="12_xuo4s"]
+[ext_resource type="Texture2D" uid="uid://b3p070nkv3dmm" path="res://parallax backgound pack/_04_bushes.png" id="13_tdvic"]
+[ext_resource type="Script" uid="uid://1he41mt86u88" path="res://world_boundary.gd" id="20_pil3s"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wmlbd"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pil3s"]
+
+[node name="GameLoop" type="Node2D" groups=["Tile"]]
+script = ExtResource("1_lxk7w")
+bomb_scene = ExtResource("9_vfyqg")
+trampoline_scene = ExtResource("3_mc7mr")
+pot_scene = ExtResource("4_q3nly")
+coin_scene = ExtResource("5_arced")
+balloon_scene = ExtResource("6_xuo4s")
+
+[node name="Slingshot" parent="." groups=["SlingShot"] instance=ExtResource("1_u3r3m")]
+z_index = 1
+
+[node name="Player" parent="." instance=ExtResource("2_ksmgf")]
+z_index = 1
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["Camera"]]
+script = ExtResource("3_ksmgf")
+
+[node name="ScoreTracker" parent="." instance=ExtResource("10_v6ba6")]
+
+[node name="SkyAbove" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.3, 0.3)
+repeat_size = Vector2(4096, 3092)
+repeat_times = 3
+script = ExtResource("6_pil3s")
+
+[node name="SkyAbove1" type="Sprite2D" parent="SkyAbove"]
+position = Vector2(0, -3519)
+texture = ExtResource("6_wmlbd")
+
+[node name="SkyAbove2" type="Sprite2D" parent="SkyAbove"]
+position = Vector2(0, -1973)
+texture = ExtResource("6_wmlbd")
+
+[node name="SkyAbove3" type="Sprite2D" parent="SkyAbove"]
+position = Vector2(2048, -1973)
+texture = ExtResource("6_wmlbd")
+
+[node name="SkyAbove4" type="Sprite2D" parent="SkyAbove"]
+position = Vector2(2048, -3519)
+texture = ExtResource("6_wmlbd")
+
+[node name="LowerSky" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.4, 0.4)
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="LowerSky"]
+position = Vector2(0, -427)
+texture = ExtResource("6_akw1b")
+
+[node name="Sprite2D2" type="Sprite2D" parent="LowerSky"]
+position = Vector2(2048, -427)
+texture = ExtResource("6_akw1b")
+
+[node name="ParallaxLayer10" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer10"]
+position = Vector2(0, -427)
+texture = ExtResource("7_wmlbd")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer10"]
+position = Vector2(2048, -427)
+texture = ExtResource("7_wmlbd")
+
+[node name="ParallaxLayer9" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer9"]
+position = Vector2(0, -427)
+texture = ExtResource("8_pil3s")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer9"]
+position = Vector2(2048, -427)
+texture = ExtResource("8_pil3s")
+
+[node name="ParallaxLayer8" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer8"]
+position = Vector2(0, -427)
+texture = ExtResource("9_mc7mr")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer8"]
+position = Vector2(2048, -427)
+texture = ExtResource("9_mc7mr")
+
+[node name="ParallaxLayer7" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer7"]
+position = Vector2(0, -427)
+texture = ExtResource("10_q3nly")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer7"]
+position = Vector2(2048, -427)
+texture = ExtResource("10_q3nly")
+
+[node name="ParallaxLayer6" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer6"]
+position = Vector2(0, -427)
+texture = ExtResource("11_arced")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer6"]
+position = Vector2(2048, -427)
+texture = ExtResource("11_arced")
+
+[node name="ParallaxLayer5" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer5"]
+position = Vector2(0, -427)
+texture = ExtResource("12_xuo4s")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer5"]
+position = Vector2(2048, -427)
+texture = ExtResource("12_xuo4s")
+
+[node name="ParallaxLayer4" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer4"]
+position = Vector2(0, -427)
+texture = ExtResource("13_tdvic")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer4"]
+position = Vector2(2048, -427)
+texture = ExtResource("13_tdvic")
+
+[node name="ParallaxLayer3" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.6, 0.6)
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(0, -427)
+texture = ExtResource("4_u6nhp")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer3"]
+position = Vector2(2048, -427)
+texture = ExtResource("4_u6nhp")
+
+[node name="ParallaxLayer2" type="Parallax2D" parent="."]
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(0, -427)
+texture = ExtResource("4_nbfos")
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer2"]
+position = Vector2(2048, -427)
+texture = ExtResource("4_nbfos")
+
+[node name="ParallaxLayer" type="Parallax2D" parent="."]
+repeat_size = Vector2(4096, 0)
+
+[node name="Sprite2D2" type="Sprite2D" parent="ParallaxLayer"]
+position = Vector2(2048, -885)
+scale = Vector2(1, 2.0629)
+texture = ExtResource("4_x7b5a")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="ParallaxLayer"]
+position = Vector2(0, -427)
+physics_material_override = SubResource("PhysicsMaterial_wmlbd")
+
+[node name="Sprite2D" type="Sprite2D" parent="ParallaxLayer/StaticBody2D"]
+position = Vector2(0, -455.5)
+scale = Vector2(1, 2.05886)
+texture = ExtResource("4_x7b5a")
+
+[node name="WorldBoundary" type="CollisionShape2D" parent="ParallaxLayer/StaticBody2D" groups=["WorldBoundary"]]
+z_index = 1
+position = Vector2(0, 700)
+shape = SubResource("WorldBoundaryShape2D_pil3s")
+script = ExtResource("20_pil3s")
+
+[node name="GameOver" parent="." groups=["GameOver"] instance=ExtResource("11_eufeh")]
+visible = false
+z_index = 2

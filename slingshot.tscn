@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyifswyvhn734"]
+
+[ext_resource type="Script" uid="uid://cdelbbkojc0s5" path="res://slingshot.gd" id="1_81g13"]
+[ext_resource type="Texture2D" uid="uid://oiicejhabfcr" path="res://Slingshot_Classic.webp" id="1_xykh3"]
+[ext_resource type="AudioStream" uid="uid://lmspjhyb8wmu" path="res://Jump2.wav" id="3_axlma"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_axlma"]
+radius = 121.037
+
+[node name="Slingshot" type="Node2D"]
+script = ExtResource("1_81g13")
+
+[node name="SlingshotClassic" type="Sprite2D" parent="."]
+scale = Vector2(0.648699, 0.372491)
+texture = ExtResource("1_xykh3")
+
+[node name="LeftLine" type="Line2D" parent="."]
+points = PackedVector2Array(62, -98, -162, -99)
+width = 5.0
+
+[node name="RightLine" type="Line2D" parent="."]
+points = PackedVector2Array(-50, -97, -206, -99)
+width = 5.0
+
+[node name="TouchArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchArea"]
+position = Vector2(3, -69)
+shape = SubResource("CircleShape2D_axlma")
+
+[node name="CenterOfSlingshot" type="Marker2D" parent="."]
+position = Vector2(13, -72)
+
+[node name="SlingshotSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_axlma")
+
+[connection signal="input_event" from="TouchArea" to="." method="_on_touch_area_input_event"]

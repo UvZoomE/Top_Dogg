@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://bhn1dfllwbox3"]
+
+[ext_resource type="Script" uid="uid://b2deoqxuvnus8" path="res://coin.gd" id="1_v7riw"]
+[ext_resource type="Texture2D" uid="uid://db5xq47unqehp" path="res://gold_coin_spritesheet.png" id="2_pdq0q"]
+[ext_resource type="AudioStream" uid="uid://cjqps2mpgo1fh" path="res://Coin.wav" id="3_w14il"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h4etq"]
+radius = 53.0
+
+[sub_resource type="Animation" id="Animation_te2np"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_o4fra"]
+resource_name = "coin_animation"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m1j4n"]
+_data = {
+&"RESET": SubResource("Animation_te2np"),
+&"coin_animation": SubResource("Animation_o4fra")
+}
+
+[node name="Coin" type="Area2D" groups=["Coin"]]
+script = ExtResource("1_v7riw")
+
+[node name="RotatingCoin" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_pdq0q")
+hframes = 6
+
+[node name="CoinCircle" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_h4etq")
+
+[node name="CoinSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_w14il")
+
+[node name="CoinAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../RotatingCoin")
+libraries = {
+&"": SubResource("AnimationLibrary_m1j4n")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

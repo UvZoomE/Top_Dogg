@@ -1,0 +1,36 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcm4m8cbags8y"]
+
+[ext_resource type="Script" uid="uid://d2n7nkyqoyqdj" path="res://pot.gd" id="1_0x0id"]
+[ext_resource type="Texture2D" uid="uid://yqenwfx3776e" path="res://pot_two_broken.png" id="2_e5jjy"]
+[ext_resource type="Texture2D" uid="uid://cstybwnafvtu4" path="res://pot_two.png" id="2_mpq5e"]
+[ext_resource type="Texture2D" uid="uid://co3we3g7tbi00" path="res://barrel_broken.png" id="3_pn8ay"]
+[ext_resource type="AudioStream" uid="uid://bcknp33grrj08" path="res://bowl dropped and breaks on tile floor 4.wav" id="4_e5jjy"]
+[ext_resource type="Texture2D" uid="uid://cfaxvbuvejves" path="res://barrel.png" id="5_fk38n"]
+[ext_resource type="AudioStream" uid="uid://b4i1q867kahnp" path="res://Hit4.wav" id="6_pn8ay"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e5jjy"]
+size = Vector2(132, 208)
+
+[node name="Pot" type="Area2D"]
+script = ExtResource("1_0x0id")
+broken_pot = ExtResource("2_e5jjy")
+broken_barrel = ExtResource("3_pn8ay")
+
+[node name="PotSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_mpq5e")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_e5jjy")
+
+[node name="BrokenVase" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_e5jjy")
+
+[node name="BarrelSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("5_fk38n")
+
+[node name="BrokenBarrel" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_pn8ay")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

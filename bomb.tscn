@@ -1,0 +1,135 @@
+[gd_scene load_steps=10 format=3 uid="uid://cw4ryq3888lea"]
+
+[ext_resource type="Script" uid="uid://bw7nj5ya66blr" path="res://bomb.gd" id="1_4fn8o"]
+[ext_resource type="Texture2D" uid="uid://bn6mmeyois2gm" path="res://flying_bomb/spritesheets/__flying_bomb_black_flying_with_up_down_motion.png" id="2_nfxiy"]
+[ext_resource type="Texture2D" uid="uid://b5vrltcgmj7sv" path="res://flying_bomb/spritesheets/__flying_bomb_black_explode.png" id="3_6w74q"]
+[ext_resource type="AudioStream" uid="uid://d1afq8vrgnu1x" path="res://JDSherbert - Pixel Explosions SFX Pack - EMP (1).wav" id="4_6w74q"]
+
+[sub_resource type="Animation" id="Animation_bwkwj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_nfxiy")]
+}
+
+[sub_resource type="Animation" id="Animation_apr5j"]
+resource_name = "explosion"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_6w74q")]
+}
+
+[sub_resource type="Animation" id="Animation_fy0rd"]
+resource_name = "flying"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9, 1, 0, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_nfxiy")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ugjkb"]
+_data = {
+&"RESET": SubResource("Animation_bwkwj"),
+&"explosion": SubResource("Animation_apr5j"),
+&"flying": SubResource("Animation_fy0rd")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_r0wls"]
+radius = 47.0106
+
+[node name="Bomb" type="Area2D"]
+script = ExtResource("1_4fn8o")
+patrol_distance = 200.0
+
+[node name="KaboomText" type="RichTextLabel" parent="."]
+offset_left = -31.0
+offset_top = -78.0
+offset_right = 69.0
+offset_bottom = -32.0
+text = "Kaboom!"
+
+[node name="FlyingBomb" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(3.5, 2.5)
+scale = Vector2(0.25, 0.248)
+texture = ExtResource("2_nfxiy")
+hframes = 5
+vframes = 2
+frame = 5
+
+[node name="BombAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../FlyingBomb")
+libraries = {
+&"": SubResource("AnimationLibrary_ugjkb")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 17)
+shape = SubResource("CircleShape2D_r0wls")
+
+[node name="ExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_6w74q")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

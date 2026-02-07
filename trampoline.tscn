@@ -1,0 +1,92 @@
+[gd_scene load_steps=8 format=3 uid="uid://kick6tiupo2p"]
+
+[ext_resource type="Script" uid="uid://s6msusaw6uqe" path="res://trampoline.gd" id="1_iocah"]
+[ext_resource type="Texture2D" uid="uid://x2sbkmjctxap" path="res://trampoline_all_frames.png" id="2_cvbrq"]
+[ext_resource type="AudioStream" uid="uid://lmspjhyb8wmu" path="res://Jump2.wav" id="3_hch62"]
+
+[sub_resource type="Animation" id="Animation_crrlg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_cvbrq")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_r4tbr"]
+resource_name = "bounce"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_cvbrq")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wld5h"]
+_data = {
+&"RESET": SubResource("Animation_crrlg"),
+&"bounce": SubResource("Animation_r4tbr")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7p1gw"]
+size = Vector2(208, 110)
+
+[node name="Trampoline" type="Area2D"]
+script = ExtResource("1_iocah")
+
+[node name="BouncyTrampoline" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_cvbrq")
+hframes = 4
+
+[node name="BounceAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../BouncyTrampoline")
+libraries = {
+&"": SubResource("AnimationLibrary_wld5h")
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 90)
+shape = SubResource("RectangleShape2D_7p1gw")
+
+[node name="BounceSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hch62")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

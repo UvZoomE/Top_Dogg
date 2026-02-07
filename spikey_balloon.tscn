@@ -1,0 +1,75 @@
+[gd_scene load_steps=15 format=3 uid="uid://ccj0q1apdveom"]
+
+[ext_resource type="Script" uid="uid://bggoxmoy2r8ya" path="res://spikey_balloon.gd" id="1_prbxc"]
+[ext_resource type="Texture2D" uid="uid://2b6wxv3klxml" path="res://floating_bomb_spikey_with_weight.png" id="2_qs0ky"]
+[ext_resource type="AudioStream" uid="uid://bkqah5qyleryo" path="res://JDSherbert - Pixel Explosions SFX Pack - Explosion (Mid - 1).wav" id="3_hsu2j"]
+[ext_resource type="Texture2D" uid="uid://c75eb14homcl3" path="res://floating_bomb_explode_green_01.png" id="4_aveb4"]
+[ext_resource type="Texture2D" uid="uid://dsuilw6vvb7qd" path="res://floating_bomb_explode_green_02.png" id="5_gls2g"]
+[ext_resource type="Texture2D" uid="uid://ccpkifwgk1uh5" path="res://floating_bomb_explode_green_03.png" id="6_7dl5r"]
+[ext_resource type="Texture2D" uid="uid://3gyis71o5fsd" path="res://floating_bomb_explode_green_04.png" id="7_0kxts"]
+[ext_resource type="Texture2D" uid="uid://bhidr3ioib88v" path="res://floating_bomb_explode_green_05.png" id="8_x5pbp"]
+[ext_resource type="Texture2D" uid="uid://chaisfjii8sic" path="res://floating_bomb_explode_green_06.png" id="9_fauvj"]
+[ext_resource type="Texture2D" uid="uid://bt43jl6mwfwru" path="res://floating_bomb_explode_green_07.png" id="10_r14yk"]
+[ext_resource type="Texture2D" uid="uid://db5mypwh7hyw4" path="res://floating_bomb_explode_green_08.png" id="11_l77bi"]
+[ext_resource type="Texture2D" uid="uid://6pgdsmv1sxjn" path="res://weight.png" id="12_qs0ky"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_10m4i"]
+size = Vector2(270, 604)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5nr3j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_aveb4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_gls2g")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_7dl5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0kxts")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_x5pbp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_fauvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_r14yk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_l77bi")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="SpikeyBalloon" type="Area2D"]
+script = ExtResource("1_prbxc")
+
+[node name="SpikeySprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_qs0ky")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+texture_filter = 1
+shape = SubResource("RectangleShape2D_10m4i")
+
+[node name="PopNoise" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_hsu2j")
+
+[node name="BalloonExplosionAnimation" type="AnimatedSprite2D" parent="."]
+visible = false
+position = Vector2(11, -110)
+sprite_frames = SubResource("SpriteFrames_5nr3j")
+frame = 7
+frame_progress = 1.0
+
+[node name="WeightSprite" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("12_qs0ky")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
