@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://07g1n5d8ubfb"]
+[gd_scene load_steps=30 format=3 uid="uid://07g1n5d8ubfb"]
 
 [ext_resource type="Script" uid="uid://cihm0elab0lbf" path="res://game_loop.gd" id="1_lxk7w"]
 [ext_resource type="PackedScene" uid="uid://dyifswyvhn734" path="res://slingshot.tscn" id="1_u3r3m"]
@@ -23,7 +23,9 @@
 [ext_resource type="Texture2D" uid="uid://xwgjyt0txkhf" path="res://parallax backgound pack/_06_hill2.png" id="11_arced"]
 [ext_resource type="PackedScene" uid="uid://75o58kofwpo5" path="res://game_over.tscn" id="11_eufeh"]
 [ext_resource type="Texture2D" uid="uid://guu3ebtelrro" path="res://parallax backgound pack/_05_hill1.png" id="12_xuo4s"]
+[ext_resource type="Texture2D" uid="uid://cm17gea7dxc2y" path="res://SkyTransition_1.png" id="13_2yl5a"]
 [ext_resource type="Texture2D" uid="uid://b3p070nkv3dmm" path="res://parallax backgound pack/_04_bushes.png" id="13_tdvic"]
+[ext_resource type="Texture2D" uid="uid://b41r1thd4opqs" path="res://SkyTransition_2.png" id="14_ee6d0"]
 [ext_resource type="Script" uid="uid://1he41mt86u88" path="res://world_boundary.gd" id="20_pil3s"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wmlbd"]
@@ -59,17 +61,33 @@ script = ExtResource("6_pil3s")
 position = Vector2(0, -3519)
 texture = ExtResource("6_wmlbd")
 
+[node name="SkyFade1" type="Sprite2D" parent="SkyAbove/SkyAbove1"]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("13_2yl5a")
+
 [node name="SkyAbove2" type="Sprite2D" parent="SkyAbove"]
 position = Vector2(0, -1973)
 texture = ExtResource("6_wmlbd")
+
+[node name="SkyFade2" type="Sprite2D" parent="SkyAbove/SkyAbove2"]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("13_2yl5a")
 
 [node name="SkyAbove3" type="Sprite2D" parent="SkyAbove"]
 position = Vector2(2048, -1973)
 texture = ExtResource("6_wmlbd")
 
+[node name="SkyFade3" type="Sprite2D" parent="SkyAbove/SkyAbove3"]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("14_ee6d0")
+
 [node name="SkyAbove4" type="Sprite2D" parent="SkyAbove"]
 position = Vector2(2048, -3519)
 texture = ExtResource("6_wmlbd")
+
+[node name="SkyFade4" type="Sprite2D" parent="SkyAbove/SkyAbove4"]
+modulate = Color(1, 1, 1, 0)
+texture = ExtResource("14_ee6d0")
 
 [node name="LowerSky" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.4, 0.4)
