@@ -25,6 +25,11 @@ var was_on_ground: bool = false
 
 var world_boundary: CollisionShape2D
 
+# --- NEW SHIELD VARIABLES ---
+var shield_health: int = 0
+var can_take_shield_hit: bool = true # Prevents instant draining
+@onready var shield_sprite: AnimatedSprite2D = $ShieldSprite
+
 func _ready():
 	freeze = true
 	freeze_mode = FREEZE_MODE_KINEMATIC
@@ -37,6 +42,16 @@ func _ready():
 
 	dust.visible = false
 	dust.animation_finished.connect(_on_dust_finished)
+	
+	# --- SHIELD SETUP ---
+	# RigidBodies need these enabled to detect hits!
+	contact_monitor = true
+	max_contacts_reported = 4
+	
+	# --- CONNECT SIGNALS ---
+	# Detect solid objects (Walls, Ground, Barrels)
+	if not body_entered.is_connected(_on_body_collision):
+		body_entered.connect(_on_body_collision)
 
 func _on_dust_finished():
 	dust.visible = false
@@ -161,3 +176,65 @@ func activate_moon_gravity(duration: float, sound_delay: float):
 	gravity_scale = default_gravity
 	self.linear_damp = default_damp 
 	self.physics_material_override.bounce = 0.5
+	
+func activate_shield(hits_allowed: int, sound_delay: float):
+	# Wait for the orb sound if needed
+	if sound_delay > 0.0:
+		await get_tree().create_timer(sound_delay).timeout
+	
+	# Reset Health
+	shield_health = hits_allowed
+	can_take_shield_hit = true
+	
+	# Reset Visuals
+	if shield_sprite:
+		shield_sprite.visible = true
+		shield_sprite.pause() # Don't loop the animation automatically!
+		shield_sprite.frame = 0 # Start at "Full Shield"
+		
+	print("Shield Activated! HP: ", shield_health)
+
+
+# --- 2. COLLISION LOGIC (The new part) ---
+func _on_body_collision(body):
+	# Only run if shield is active AND we aren't in cooldown
+	if shield_health > 0 and can_take_shield_hit:
+		take_shield_damage()
+
+func take_shield_damage():
+	# 1. Reduce Health
+	shield_health -= 1
+	print("Shield Hit! Remaining: ", shield_health)
+	
+	# 2. Update Visuals
+	if shield_health > 0:
+		# MATH: If Max is 10 and we have 9 left... 10 - 9 = Frame 1.
+		# If we have 1 left... 10 - 1 = Frame 9.
+		var max_hp = 10
+		var frame_index = max_hp - shield_health
+		
+		# Clamp just in case to prevent errors
+		if shield_sprite:
+			shield_sprite.frame = clamp(frame_index, 0, 9)
+			
+		# 3. Add a tiny cooldown (invincibility frames)
+		# This prevents a scraping wall from hitting you 60 times a second
+		can_take_shield_hit = false
+		await get_tree().create_timer(0.2).timeout
+		can_take_shield_hit = true
+		
+	else:
+		# 4. Shield Broken
+		deactivate_shield()
+
+func deactivate_shield():
+	shield_health = 0
+	if shield_sprite:
+		shield_sprite.visible = false
+		$PowerDown.play()
+		
+# Triggered by Areas (Flying enemies, hazards)
+func _on_area_entered(area):
+	# Optional: Check if the area is actually "dangerous" 
+	# (e.g., ignore coins or checkpoints)
+	take_shield_damage()

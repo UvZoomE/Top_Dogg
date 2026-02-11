@@ -39,7 +39,9 @@ func _physics_process(delta):
 	position.y = start_y + offset
 
 func _on_body_entered(body):
-	if body is Player and not is_exploding: 
+	if body is Player and not is_exploding:
+		if body.has_method("take_shield_damage"):
+			body.take_shield_damage()
 		detonate()
 
 func detonate():

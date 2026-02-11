@@ -36,6 +36,8 @@ func _ready():
 func _on_body_entered(body):
 	# We only care if the player hits us and we aren't already broken
 	if body is Player and not is_broken: 
+		if body.has_method("take_shield_damage"):
+			body.take_shield_damage()
 		break_object()
 
 func randomize_visuals():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://07g1n5d8ubfb"]
+[gd_scene load_steps=31 format=3 uid="uid://07g1n5d8ubfb"]
 
 [ext_resource type="Script" uid="uid://cihm0elab0lbf" path="res://game_loop.gd" id="1_lxk7w"]
 [ext_resource type="PackedScene" uid="uid://dyifswyvhn734" path="res://slingshot.tscn" id="1_u3r3m"]
@@ -27,6 +27,7 @@
 [ext_resource type="Texture2D" uid="uid://b3p070nkv3dmm" path="res://parallax backgound pack/_04_bushes.png" id="13_tdvic"]
 [ext_resource type="Texture2D" uid="uid://b41r1thd4opqs" path="res://SkyTransition_2.png" id="14_ee6d0"]
 [ext_resource type="Script" uid="uid://1he41mt86u88" path="res://world_boundary.gd" id="20_pil3s"]
+[ext_resource type="PackedScene" uid="uid://c0250j3mhxhgr" path="res://orb.tscn" id="28_ee6d0"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_wmlbd"]
 
@@ -234,3 +235,6 @@ script = ExtResource("20_pil3s")
 [node name="GameOver" parent="." groups=["GameOver"] instance=ExtResource("11_eufeh")]
 visible = false
 z_index = 2
+
+[node name="Orb" parent="." instance=ExtResource("28_ee6d0")]
+position = Vector2(495, -196)

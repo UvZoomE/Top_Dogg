@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dyhksg8gcuvue"]
+[gd_scene load_steps=41 format=3 uid="uid://dyhksg8gcuvue"]
 
 [ext_resource type="Script" uid="uid://dg3rvs7ma6i8u" path="res://player.gd" id="1_onrkg"]
 [ext_resource type="Texture2D" uid="uid://6yvhbpobolsf" path="res://icon.svg" id="2_i3pqv"]
@@ -23,6 +23,17 @@
 [ext_resource type="Texture2D" uid="uid://c8ju1s1hkyn3q" path="res://dust3.png" id="21_dx0e4"]
 [ext_resource type="Texture2D" uid="uid://c2pcu7it6wrbq" path="res://dust4.png" id="22_jm5j8"]
 [ext_resource type="AudioStream" uid="uid://bew88to1s3g0m" path="res://Hit1.wav" id="23_7lmhl"]
+[ext_resource type="Texture2D" uid="uid://w4ob3wepwrmq" path="res://100-percent-shield-effect-colored.png" id="24_tkwlq"]
+[ext_resource type="Texture2D" uid="uid://dhftefc2pjpwy" path="res://90-percent-shield-effect-colored.png" id="25_hl5qd"]
+[ext_resource type="Texture2D" uid="uid://dfqyqm5unyx4a" path="res://80-percent-shield-effect-colored.png" id="26_ek41f"]
+[ext_resource type="Texture2D" uid="uid://cx2uaw2k034db" path="res://70-percent-shield-effect-colored.png" id="27_khis8"]
+[ext_resource type="Texture2D" uid="uid://bbm7h8dr62xw5" path="res://60-percent-shield-effect-colored.png" id="28_b88wv"]
+[ext_resource type="Texture2D" uid="uid://begyhum3qlchv" path="res://50-percent-shield-effect-colored.png" id="29_pgbbb"]
+[ext_resource type="Texture2D" uid="uid://d3fx7mkddalok" path="res://40-percent-shield-effect-colored.png" id="30_331ug"]
+[ext_resource type="Texture2D" uid="uid://cumolk60firgn" path="res://30-percent-shield-effect-colored.png" id="31_ny14h"]
+[ext_resource type="Texture2D" uid="uid://cnfkubw453g8" path="res://20-percent-shield-effect-colored.png" id="32_ibah8"]
+[ext_resource type="Texture2D" uid="uid://cr0qurt7tk5kk" path="res://10-percent-shield-effect-colored.png" id="33_3iwfv"]
+[ext_resource type="AudioStream" uid="uid://b5pd5rntpoyys" path="res://Lose1.wav" id="34_qwsg1"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_onrkg"]
 friction = 0.5
@@ -109,6 +120,44 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_1xqrm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("24_tkwlq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_hl5qd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_ek41f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_khis8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_b88wv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_pgbbb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_331ug")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_ny14h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_ibah8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_3iwfv")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
 [node name="Player" type="RigidBody2D" groups=["Player"]]
 physics_material_override = SubResource("PhysicsMaterial_onrkg")
 script = ExtResource("1_onrkg")
@@ -123,13 +172,13 @@ texture = ExtResource("2_i3pqv")
 [node name="Torpedo" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_dx0e4")
-frame_progress = 0.213951
+frame_progress = 0.0302551
 
 [node name="Flame" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(-363, -3)
 sprite_frames = SubResource("SpriteFrames_pylmc")
-frame_progress = 0.285325
+frame_progress = 0.17778
 
 [node name="BoostSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("17_op7ga")
@@ -160,3 +209,10 @@ position = Vector2(0, -62)
 
 [node name="DirtSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("23_7lmhl")
+
+[node name="ShieldSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_1xqrm")
+
+[node name="PowerDown" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("34_qwsg1")

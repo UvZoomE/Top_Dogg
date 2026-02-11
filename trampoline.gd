@@ -21,6 +21,8 @@ func _ready():
 	
 func _on_body_entered(body):
 	if body is Player and not is_bouncing: 
+		if body.has_method("take_shield_damage"):
+			body.take_shield_damage()
 		bounce()
 	
 func bounce():

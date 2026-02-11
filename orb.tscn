@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=3 uid="uid://c0250j3mhxhgr"]
+
+[ext_resource type="Script" uid="uid://dqgbn7hw5j8p0" path="res://shield.gd" id="1_2qvkr"]
+[ext_resource type="Texture2D" uid="uid://d1d71osyx1wyr" path="res://rotating-electric-bal-spritesheet-512px-by-512px-per-frame.png" id="2_vx8ir"]
+[ext_resource type="AudioStream" uid="uid://br4jfcej2x2vo" path="res://Powerup4.wav" id="3_73urv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3niym"]
+radius = 94.0053
+
+[sub_resource type="Animation" id="Animation_jg7xi"]
+resource_name = "flashing"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_sdbt5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pbj6m"]
+_data = {
+&"RESET": SubResource("Animation_sdbt5"),
+&"flashing": SubResource("Animation_jg7xi")
+}
+
+[node name="Orb" type="Area2D"]
+script = ExtResource("1_2qvkr")
+
+[node name="FlashingOrb" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("2_vx8ir")
+hframes = 4
+vframes = 3
+
+[node name="OrbCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_3niym")
+
+[node name="OrbSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_73urv")
+
+[node name="OrbAnimation" type="AnimationPlayer" parent="."]
+root_node = NodePath("../FlashingOrb")
+libraries = {
+&"": SubResource("AnimationLibrary_pbj6m")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
