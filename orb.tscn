@@ -5,7 +5,22 @@
 [ext_resource type="AudioStream" uid="uid://br4jfcej2x2vo" path="res://Powerup4.wav" id="3_73urv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_3niym"]
-radius = 94.0053
+radius = 47.0956
+
+[sub_resource type="Animation" id="Animation_sdbt5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_jg7xi"]
 resource_name = "flashing"
@@ -24,21 +39,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 }
 
-[sub_resource type="Animation" id="Animation_sdbt5"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pbj6m"]
 _data = {
 &"RESET": SubResource("Animation_sdbt5"),
@@ -50,6 +50,7 @@ script = ExtResource("1_2qvkr")
 
 [node name="FlashingOrb" type="Sprite2D" parent="."]
 texture_filter = 1
+scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_vx8ir")
 hframes = 4
 vframes = 3

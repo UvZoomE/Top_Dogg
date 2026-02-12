@@ -212,6 +212,7 @@ stream = ExtResource("23_7lmhl")
 
 [node name="ShieldSprite" type="AnimatedSprite2D" parent="."]
 visible = false
+scale = Vector2(0.3, 0.3)
 sprite_frames = SubResource("SpriteFrames_1xqrm")
 
 [node name="PowerDown" type="AudioStreamPlayer2D" parent="."]

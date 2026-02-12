@@ -237,4 +237,4 @@ visible = false
 z_index = 2
 
 [node name="Orb" parent="." instance=ExtResource("28_ee6d0")]
-position = Vector2(495, -196)
+position = Vector2(1000, -1000)

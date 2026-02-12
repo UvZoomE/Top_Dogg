@@ -178,6 +178,12 @@ func activate_moon_gravity(duration: float, sound_delay: float):
 	self.physics_material_override.bounce = 0.5
 	
 func activate_shield(hits_allowed: int, sound_delay: float):
+	
+	if shield_sprite:
+		shield_sprite.visible = true
+		shield_sprite.pause() # Don't loop the animation automatically!
+		shield_sprite.frame = 0 # Start at "Full Shield"
+
 	# Wait for the orb sound if needed
 	if sound_delay > 0.0:
 		await get_tree().create_timer(sound_delay).timeout
@@ -185,12 +191,6 @@ func activate_shield(hits_allowed: int, sound_delay: float):
 	# Reset Health
 	shield_health = hits_allowed
 	can_take_shield_hit = true
-	
-	# Reset Visuals
-	if shield_sprite:
-		shield_sprite.visible = true
-		shield_sprite.pause() # Don't loop the animation automatically!
-		shield_sprite.frame = 0 # Start at "Full Shield"
 		
 	print("Shield Activated! HP: ", shield_health)
 
