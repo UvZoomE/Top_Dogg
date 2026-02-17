@@ -199,10 +199,10 @@ frame_progress = 1.0
 position = Vector2(0, 63)
 
 [node name="LeftOfPlayer" type="Marker2D" parent="."]
-position = Vector2(-65, 0)
+position = Vector2(-63, 0)
 
 [node name="RightOfPlayer" type="Marker2D" parent="."]
-position = Vector2(65, 0)
+position = Vector2(63, 0)
 
 [node name="TopOfPlayer" type="Marker2D" parent="."]
 position = Vector2(0, -62)

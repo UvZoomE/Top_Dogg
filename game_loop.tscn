@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://07g1n5d8ubfb"]
+[gd_scene load_steps=32 format=3 uid="uid://07g1n5d8ubfb"]
 
 [ext_resource type="Script" uid="uid://cihm0elab0lbf" path="res://game_loop.gd" id="1_lxk7w"]
 [ext_resource type="PackedScene" uid="uid://dyifswyvhn734" path="res://slingshot.tscn" id="1_u3r3m"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://cfay6ew0i8bsm" path="res://score_tracker.tscn" id="10_v6ba6"]
 [ext_resource type="Texture2D" uid="uid://xwgjyt0txkhf" path="res://parallax backgound pack/_06_hill2.png" id="11_arced"]
 [ext_resource type="PackedScene" uid="uid://75o58kofwpo5" path="res://game_over.tscn" id="11_eufeh"]
+[ext_resource type="PackedScene" uid="uid://s4hbx2axn0hm" path="res://ufo.tscn" id="12_q81a1"]
 [ext_resource type="Texture2D" uid="uid://guu3ebtelrro" path="res://parallax backgound pack/_05_hill1.png" id="12_xuo4s"]
 [ext_resource type="Texture2D" uid="uid://cm17gea7dxc2y" path="res://SkyTransition_1.png" id="13_2yl5a"]
 [ext_resource type="Texture2D" uid="uid://b3p070nkv3dmm" path="res://parallax backgound pack/_04_bushes.png" id="13_tdvic"]
@@ -40,6 +41,8 @@ trampoline_scene = ExtResource("3_mc7mr")
 pot_scene = ExtResource("4_q3nly")
 coin_scene = ExtResource("5_arced")
 balloon_scene = ExtResource("6_xuo4s")
+orb_scene = ExtResource("28_ee6d0")
+ufo_scene = ExtResource("12_q81a1")
 
 [node name="Slingshot" parent="." groups=["SlingShot"] instance=ExtResource("1_u3r3m")]
 z_index = 1
@@ -235,6 +238,3 @@ script = ExtResource("20_pil3s")
 [node name="GameOver" parent="." groups=["GameOver"] instance=ExtResource("11_eufeh")]
 visible = false
 z_index = 2
-
-[node name="Orb" parent="." instance=ExtResource("28_ee6d0")]
-position = Vector2(1000, -1000)

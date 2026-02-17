@@ -21,8 +21,11 @@ func _ready():
 	
 func _on_body_entered(body):
 	if body is Player and not is_bouncing: 
-		if body.has_method("take_shield_damage"):
-			body.take_shield_damage()
+		if body.shield_health > 0:
+			if body.has_method("take_shield_damage"):
+				# 2. DAMAGE: Lower shield HP, but pass 'false' 
+				# to skip the shield's small physics boost.
+				body.take_shield_damage(false)
 		bounce()
 	
 func bounce():

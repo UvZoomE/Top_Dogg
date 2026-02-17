@@ -19,7 +19,6 @@ func _pressed():
 	await Talo.players.identify("username", result)
 	var score = player.position.x
 	var res := await Talo.leaderboards.add_entry(leaderboard_name, score)
-	print(res.entry.score)
 	get_tree().change_scene_to_file("res://main_menu.tscn")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

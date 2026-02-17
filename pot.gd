@@ -36,9 +36,14 @@ func _ready():
 func _on_body_entered(body):
 	# We only care if the player hits us and we aren't already broken
 	if body is Player and not is_broken: 
-		if body.has_method("take_shield_damage"):
-			body.take_shield_damage()
-		break_object()
+		if body.shield_health > 0:
+			if body.has_method("take_shield_damage"):
+				# 2. DAMAGE: Lower shield HP, but pass 'false' 
+				# to skip the shield's small physics boost.
+				body.take_shield_damage(true)
+				break_object(true)
+				return
+		break_object(false)
 
 func randomize_visuals():
 	# Randomly decide: True (Barrel) or False (Pot)
@@ -53,7 +58,7 @@ func randomize_visuals():
 		pot_sprite.visible = true
 		pot_sprite.texture = clean_pot_texture # Ensure it looks new
 
-func break_object():
+func break_object(shield_active: bool):
 	is_broken = true
 	set_deferred("monitoring", false) # Stop collisions immediately
 
@@ -72,8 +77,9 @@ func break_object():
 
 	# 2. PHYSICS IMPACT (Optional: Stop the player slightly)
 	if player is RigidBody2D:
-		player.linear_velocity.x = abs(player.linear_velocity.x) # Force forward direction
-		player.linear_velocity = player.linear_velocity * 0.7 # Slow down
+		if (!shield_active):
+			player.linear_velocity.x = abs(player.linear_velocity.x) # Force forward direction
+			player.linear_velocity = player.linear_velocity * 0.7 # Slow down
 
 	# 3. THE FIX: FORCE A VISUAL WAIT
 	# Don't wait for the sound. The sound might be too short (0.1s) or fail.

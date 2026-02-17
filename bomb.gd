@@ -16,6 +16,7 @@ func _ready():
 	$KaboomText.visible = false
 	# Remember the starting center point
 	start_y = position.y 
+	
 
 func _physics_process(delta):
 	# Stop everything if we are exploding
@@ -39,9 +40,18 @@ func _physics_process(delta):
 	position.y = start_y + offset
 
 func _on_body_entered(body):
+	# Only run if it's the player and we aren't already exploding
 	if body is Player and not is_exploding:
-		if body.has_method("take_shield_damage"):
-			body.take_shield_damage()
+		
+		# 1. CHECK: Is the shield actually active?
+		# We access the 'shield_health' variable directly from the Player script.
+		if body.shield_health > 0:
+			if body.has_method("take_shield_damage"):
+				# 2. DAMAGE: Lower shield HP, but pass 'false' 
+				# to skip the shield's small physics boost.
+				body.take_shield_damage(false) 
+		
+		# 3. EXPLODE: The bomb always explodes and applies its own MASSIVE boost
 		detonate()
 
 func detonate():

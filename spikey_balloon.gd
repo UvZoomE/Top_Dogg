@@ -33,11 +33,16 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body is Player and not is_exploding: 
-		if body.has_method("take_shield_damage"):
-			body.take_shield_damage()
-		detonate()
+		if body.shield_health > 0:
+			if body.has_method("take_shield_damage"):
+				# 2. DAMAGE: Lower shield HP, but pass 'false' 
+				# to skip the shield's small physics boost.
+				body.take_shield_damage(true)
+				detonate(true)
+				return
+		detonate(false)
 
-func detonate():
+func detonate(shield_active: bool):
 	var location = position
 	is_exploding = true
 	set_deferred("monitoring", false) # Stop collisions
@@ -45,11 +50,12 @@ func detonate():
 	# Trigger effects
 	pop_noise.play()
 	if player is RigidBody2D:
+		if (!shield_active):
 		# 1. SANITIZE: Flip any backward momentum to forward momentum
 		# This ensures we don't fight against the player's existing speed.
-		player.linear_velocity.x = abs(player.linear_velocity.x)
+			player.linear_velocity.x = abs(player.linear_velocity.x)
 		
-		player.linear_velocity = player.linear_velocity * 0.7 # Slow down
+			player.linear_velocity = player.linear_velocity * 0.7 # Slow down
 	
 	$BalloonExplosionAnimation.visible = true
 	$BalloonExplosionAnimation.play("default")

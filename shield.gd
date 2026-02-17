@@ -53,12 +53,15 @@ func collect():
 	# 4. RECYCLE
 	collected.emit(self)
 
-# New function called by Main to reset this bomb
 func respawn(new_position):
 	global_position = new_position
+	start_y = new_position.y 
 	
-	# IMPORTANT: Reset the sine wave anchor to the NEW location
-	start_y = new_position.y
-	visible = true
 	set_deferred("monitoring", true)
-	$OrbAnimation.play("flashing")
+	visible = true
+	
+	# FIX: Rewind the AnimationPlayer to the start
+	$OrbAnimation.stop()               # Stop playing
+	$OrbAnimation.play("flashing")       # Queue the correct animation
+	$OrbAnimation.seek(0, true)        # Jump instantly to time 0.0 (the first frame)
+	$OrbAnimation.stop()               # Pause it there

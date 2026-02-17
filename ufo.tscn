@@ -1,0 +1,92 @@
+[gd_scene load_steps=17 format=3 uid="uid://s4hbx2axn0hm"]
+
+[ext_resource type="Script" uid="uid://bt2cvrkxx85kb" path="res://ufo.gd" id="1_f38p0"]
+[ext_resource type="Texture2D" uid="uid://ceb6wcpb3dh7n" path="res://ufo_3_small_dome_opaque.png" id="2_2aslv"]
+[ext_resource type="Texture2D" uid="uid://ch3o1ghailu4p" path="res://green_light_glow.png" id="3_5de5w"]
+[ext_resource type="AudioStream" uid="uid://c63idfbd3fwnx" path="res://1up3.wav" id="4_7msvh"]
+[ext_resource type="AudioStream" uid="uid://ci437pqdksnkw" path="res://Explosion2.wav" id="5_pfry6"]
+[ext_resource type="Texture2D" uid="uid://btwyk13gq07xw" path="res://flying_bomb/body_parts_spriterfile/explosion_effect/explosion_efect_01.png" id="6_0delg"]
+[ext_resource type="Texture2D" uid="uid://c2q3u6f276ftf" path="res://flying_bomb/body_parts_spriterfile/explosion_effect/explosion_efect_02.png" id="7_urqx0"]
+[ext_resource type="Texture2D" uid="uid://8vhiaknao7b3" path="res://flying_bomb/body_parts_spriterfile/explosion_effect/explosion_efect_03.png" id="8_pnxeu"]
+[ext_resource type="Texture2D" uid="uid://d3i0olyw84qkm" path="res://flying_bomb/body_parts_spriterfile/explosion_effect/explosion_efect_04.png" id="9_kw523"]
+[ext_resource type="Texture2D" uid="uid://crqjq0t1h4d58" path="res://flying_bomb/body_parts_spriterfile/explosion_effect/explosion_efect_05.png" id="10_68ckp"]
+[ext_resource type="Texture2D" uid="uid://cyaarthyjwiky" path="res://flying_bomb/body_parts_spriterfile/explosion_effect/explosion_efect_06.png" id="11_5w6bh"]
+[ext_resource type="Texture2D" uid="uid://chykb4ne3licl" path="res://flying_bomb/body_parts_spriterfile/explosion_effect/explosion_efect_07.png" id="12_bg6pu"]
+[ext_resource type="Texture2D" uid="uid://yaydpcaibdwt" path="res://flying_bomb/body_parts_spriterfile/explosion_effect/explosion_efect_08.png" id="13_31dl5"]
+[ext_resource type="AudioStream" uid="uid://dk62dnr2bursk" path="res://Lose4.wav" id="14_2aslv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eechw"]
+radius = 132.136
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6mju6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_0delg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_urqx0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pnxeu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_kw523")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_68ckp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_5w6bh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bg6pu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_31dl5")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Ufo" type="Area2D"]
+script = ExtResource("1_f38p0")
+
+[node name="Ship" type="Sprite2D" parent="."]
+z_index = 2
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("2_2aslv")
+
+[node name="Glow" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(0.999992, 52)
+scale = Vector2(1.71464, 1.15732)
+texture = ExtResource("3_5de5w")
+
+[node name="UfoCollider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_eechw")
+
+[node name="HoverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_7msvh")
+pitch_scale = 0.65
+autoplay = true
+max_distance = 1000.0
+
+[node name="UfoExplosionSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_pfry6")
+max_distance = 6000.0
+attenuation = 0.210224
+
+[node name="UfoExplosionAnimation" type="AnimatedSprite2D" parent="."]
+visible = false
+z_index = 1
+scale = Vector2(0.5, 0.5)
+sprite_frames = SubResource("SpriteFrames_6mju6")
+frame = 7
+frame_progress = 1.0
+
+[node name="UfoTeleportSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_2aslv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -59,7 +59,11 @@ func _on_dust_finished():
 
 func _process(delta):
 	var floor_y = world_boundary.global_position.y
-	var buffer = 1.0 
+	
+	# CHANGED: Increased from 1.0 to 8.0. 
+	# This ensures detection even if the physics engine stops the player
+	# a few pixels above the mathematical line (which is common).
+	var buffer = 8.0 
 	
 	var hit_bottom = bottom_marker.global_position.y > floor_y - buffer
 	var hit_left   = left_marker.global_position.y   > floor_y - buffer
@@ -74,6 +78,8 @@ func _process(delta):
 		dust.visible = true
 		dust.frame = 0 
 		
+		# We check the sides first. 
+		# If we hit bottom, we default to standard orientation.
 		if hit_bottom:
 			pass
 		elif hit_left:
@@ -104,7 +110,6 @@ func _integrate_forces(state):
 		state.angular_velocity = 0
 
 func _physics_process(delta):
-	print("SUPER MODE SPEED: ", linear_velocity.x)
 	pass
 
 func ThrowPlayer():
@@ -191,9 +196,6 @@ func activate_shield(hits_allowed: int, sound_delay: float):
 	# Reset Health
 	shield_health = hits_allowed
 	can_take_shield_hit = true
-		
-	print("Shield Activated! HP: ", shield_health)
-
 
 # --- 2. COLLISION LOGIC (The new part) ---
 func _on_body_collision(body):
@@ -201,30 +203,42 @@ func _on_body_collision(body):
 	if shield_health > 0 and can_take_shield_hit:
 		take_shield_damage()
 
-func take_shield_damage():
+# Modified function signature: defaults to true for normal walls/enemies
+func take_shield_damage(apply_kickback: bool = true):
 	# 1. Reduce Health
 	shield_health -= 1
-	print("Shield Hit! Remaining: ", shield_health)
+	print("Shield hit!")
 	
-	# 2. Update Visuals
+	# 2. Update Visuals & Physics
 	if shield_health > 0:
-		# MATH: If Max is 10 and we have 9 left... 10 - 9 = Frame 1.
-		# If we have 1 left... 10 - 1 = Frame 9.
 		var max_hp = 10
 		var frame_index = max_hp - shield_health
 		
-		# Clamp just in case to prevent errors
+		# Update sprite frame
 		if shield_sprite:
 			shield_sprite.frame = clamp(frame_index, 0, 9)
+
+		# 3. KICKBACK LOGIC
+		if apply_kickback:
+			# --- CHANGE IS HERE ---
+			print("Extra bounce given!")
 			
-		# 3. Add a tiny cooldown (invincibility frames)
-		# This prevents a scraping wall from hitting you 60 times a second
+			# We define the direction (Right and Up)
+			var explosion_dir = Vector2(1.0, -1.0).normalized()
+			
+			# Instead of adding force (impulse), we OVERWRITE the velocity.
+			# This ensures the speed is exactly 2000, no matter how fast 
+			# or slow you were going before.
+			self.linear_velocity = explosion_dir * 2000
+		else:
+			print("Extra bounce not given")	
+		# 4. Add cooldown (invincibility frames)
 		can_take_shield_hit = false
 		await get_tree().create_timer(0.2).timeout
 		can_take_shield_hit = true
 		
 	else:
-		# 4. Shield Broken
+		# 5. Shield Broken
 		deactivate_shield()
 
 func deactivate_shield():
