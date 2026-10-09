@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://75o58kofwpo5"]
+[gd_scene load_steps=8 format=3 uid="uid://75o58kofwpo5"]
 
 [ext_resource type="Script" uid="uid://clbksgdu64vnh" path="res://game_over.gd" id="1_8u835"]
 [ext_resource type="Texture2D" uid="uid://bqqoguoucp3l6" path="res://Box_WhiteOutline_Rounded.png" id="1_ccer4"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dk5b84i8pj8ve" path="res://WinnersPodium.png" id="3_ftari"]
 [ext_resource type="Script" uid="uid://x8qidet6hkq3" path="res://end_score.gd" id="4_ftari"]
 [ext_resource type="Script" uid="uid://cqe1l5w7j71lt" path="res://exit_button.gd" id="6_28vn7"]
+[ext_resource type="Script" uid="uid://wwkqakj1doqu" path="res://replay_button.gd" id="6_k2vha"]
 
 [node name="GameOver" type="Control"]
 layout_mode = 3
@@ -116,6 +117,8 @@ layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
 text = "Replay"
+script = ExtResource("6_k2vha")
+leaderboard_name = "top scores"
 
 [node name="ExitContainer" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2

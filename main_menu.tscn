@@ -1,9 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cy7b0rrh3q0ku"]
+[gd_scene load_steps=12 format=3 uid="uid://cy7b0rrh3q0ku"]
 
 [ext_resource type="Script" uid="uid://b3xtugkpnk5sh" path="res://PlayButton.gd" id="1_06t4h"]
 [ext_resource type="Texture2D" uid="uid://bqqoguoucp3l6" path="res://Box_WhiteOutline_Rounded.png" id="1_fu7sn"]
 [ext_resource type="Script" uid="uid://q2ekd1pbm28x" path="res://leaderboard_button.gd" id="2_7vrkn"]
 [ext_resource type="Texture2D" uid="uid://k0swx7y41sm2" path="res://Box_Orange_Rounded.png" id="3_glbon"]
+[ext_resource type="Script" uid="uid://drp0egw4e1i3k" path="res://back_button.gd" id="3_nlkkf"]
+[ext_resource type="Script" uid="uid://dil4cv3k50sff" path="res://leaderboard.gd" id="4_glbon"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]
+texture = ExtResource("3_glbon")
 
 [sub_resource type="LabelSettings" id="LabelSettings_glbon"]
 font_color = Color(0, 0, 0, 1)
@@ -70,7 +75,14 @@ theme_override_constants/separation = 10
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+
+[node name="Control" type="Control" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 
 [node name="MainMenuHeaderText" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer" groups=["HeaderText"]]
 layout_mode = 2
@@ -79,6 +91,25 @@ size_flags_vertical = 6
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 24
 text = "Main Menu"
+
+[node name="Control3" type="Control" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control4" type="Control" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="BackButton" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_styles/normal = SubResource("StyleBoxTexture_glbon")
+text = "Back"
+script = ExtResource("3_nlkkf")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -97,6 +128,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 texture = ExtResource("3_glbon")
 expand_mode = 1
+script = ExtResource("4_glbon")
+leaderboard_internal_name = "top scores"
 
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard"]
 layout_mode = 1
