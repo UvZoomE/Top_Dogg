@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://baxa25mfqxh3l"]
+
+[ext_resource type="Script" uid="uid://btqdiu3vrutpl" path="res://Scripts/leaderboard_entries.gd" id="1_ix752"]
+
+[node name="HBoxContainer" type="HBoxContainer" unique_id=1128093249]
+custom_minimum_size = Vector2(0, 42)
+offset_right = 169.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+theme_override_constants/separation = 14
+script = ExtResource("1_ix752")
+
+[node name="Position" type="Label" parent="." unique_id=1204952634]
+custom_minimum_size = Vector2(64, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6509804, 0.35686275, 0.07058824, 1)
+theme_override_font_sizes/font_size = 20
+text = "1"
+
+[node name="Username" type="Label" parent="." unique_id=824864825]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 36)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.09019608, 0.15686275, 0.23921569, 1)
+theme_override_font_sizes/font_size = 18
+text = "username"
+
+[node name="Score" type="Label" parent="." unique_id=606480837]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 36)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.09019608, 0.15686275, 0.23921569, 1)
+theme_override_font_sizes/font_size = 20
+text = "score"
+horizontal_alignment = 2
