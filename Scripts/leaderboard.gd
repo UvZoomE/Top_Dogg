@@ -25,6 +25,18 @@ func _build_entries() -> void:
 	
 	var cached_entries = Talo.leaderboards.get_cached_entries(leaderboard_internal_name)
 	print("Building ", cached_entries.size(), " cached leaderboard entries.")
+
+	if cached_entries.is_empty():
+		var empty := Label.new()
+		empty.text = "No scores yet.\nBe the first to launch!"
+		empty.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
+		empty.custom_minimum_size = Vector2(0, 220)
+		empty.add_theme_font_size_override("font_size", 26)
+		empty.add_theme_color_override("font_color", Color(0.75, 0.85, 1.0, 0.8))
+		entries_container.add_child(empty)
+		return
+
 	for entry in cached_entries:
 		_create_entry(entry)
 

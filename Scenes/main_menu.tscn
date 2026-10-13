@@ -1,71 +1,114 @@
 [gd_scene format=3 uid="uid://cy7b0rrh3q0ku"]
 
 [ext_resource type="Script" uid="uid://b3xtugkpnk5sh" path="res://Scripts/PlayButton.gd" id="1_06t4h"]
-[ext_resource type="Texture2D" uid="uid://bqqoguoucp3l6" path="res://Assets/Box_WhiteOutline_Rounded.png" id="1_fu7sn"]
 [ext_resource type="Script" uid="uid://q2ekd1pbm28x" path="res://Scripts/leaderboard_button.gd" id="2_7vrkn"]
-[ext_resource type="Texture2D" uid="uid://k0swx7y41sm2" path="res://Assets/Box_Orange_Rounded.png" id="3_glbon"]
 [ext_resource type="Script" uid="uid://drp0egw4e1i3k" path="res://Scripts/back_button.gd" id="3_nlkkf"]
 [ext_resource type="Script" uid="uid://dil4cv3k50sff" path="res://Scripts/leaderboard.gd" id="4_glbon"]
+[ext_resource type="Script" uid="uid://k1umvrm3si4f" path="res://Scripts/main_menu_fx.gd" id="5_fx"]
+[ext_resource type="Texture2D" uid="uid://oiicejhabfcr" path="res://Assets/Slingshot_Classic.webp" id="6_sling"]
+[ext_resource type="Texture2D" uid="uid://6yvhbpobolsf" path="res://icon.svg" id="7_icon"]
+[ext_resource type="Texture2D" uid="uid://ceb6wcpb3dh7n" path="res://Assets/ufo_3_small_dome_opaque.png" id="8_ufo"]
+[ext_resource type="Texture2D" uid="uid://db5xq47unqehp" path="res://Assets/gold_coin_spritesheet.png" id="9_coin"]
+[ext_resource type="Texture2D" uid="uid://2b6wxv3klxml" path="res://Assets/floating_bomb_spikey_with_weight.png" id="10_balloon"]
+[ext_resource type="Texture2D" uid="uid://dk5b84i8pj8ve" path="res://Assets/WinnersPodium.png" id="11_podium"]
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_glbon"]
-texture = ExtResource("3_glbon")
+[sub_resource type="Gradient" id="Gradient_sky"]
+colors = PackedColorArray(0.04, 0.07, 0.16, 1, 0.17, 0.3, 0.52, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sky"]
+gradient = SubResource("Gradient_sky")
+width = 8
+height = 256
+fill_to = Vector2(0, 1)
+
+[sub_resource type="Gradient" id="Gradient_star"]
+offsets = PackedFloat32Array(0, 0.25, 0.75, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8dnnj"]
+bg_color = Color(0.07, 0.12, 0.22, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.82, 0.4, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 10
+shadow_color = Color(0, 0, 0, 0.5)
+shadow_size = 24
+shadow_offset = Vector2(0, 10)
+
+[sub_resource type="FontVariation" id="FontVariation_title"]
+variation_embolden = 0.8
+
+[sub_resource type="FontVariation" id="FontVariation_ui"]
+variation_embolden = 0.4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_opfnp"]
 content_margin_left = 16.0
-content_margin_top = 16.0
+content_margin_top = 12.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.95686275, 0.6509804, 0.16470589, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.8862745, 0.6392157, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 5
+content_margin_bottom = 18.0
+bg_color = Color(0.957, 0.651, 0.165, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 8
+border_color = Color(0.55, 0.27, 0.05, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+shadow_offset = Vector2(0, 6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cp0ys"]
 content_margin_left = 16.0
-content_margin_top = 16.0
+content_margin_top = 18.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.8509804, 0.47058824, 0.09803922, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.95686275, 0.6509804, 0.16470589, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 5
+content_margin_bottom = 12.0
+bg_color = Color(0.85, 0.47, 0.1, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.55, 0.27, 0.05, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 2
+shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yhxw7"]
 content_margin_left = 16.0
-content_margin_top = 16.0
+content_margin_top = 12.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(1, 0.81960785, 0.4, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.9411765, 0.7607843, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 5
+content_margin_bottom = 18.0
+bg_color = Color(1, 0.78, 0.3, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 8
+border_color = Color(0.55, 0.27, 0.05, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 10
+shadow_offset = Vector2(0, 7)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_trj04"]
 content_margin_left = 16.0
-content_margin_top = 16.0
+content_margin_top = 12.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
+content_margin_bottom = 18.0
 bg_color = Color(0.95686275, 0.6509804, 0.16470589, 1)
 draw_center = false
 border_width_left = 3
@@ -73,85 +116,93 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_glbon"]
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_nlkkf"]
-font_color = Color(0, 0, 0, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_qe12f"]
-font_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_board"]
+bg_color = Color(0.04, 0.08, 0.16, 0.8)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.12)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxLine" id="StyleBoxLine_16hvj"]
-color = Color(0.1254902, 0.23137255, 0.34509805, 1)
+color = Color(1, 0.82, 0.4, 0.5)
 thickness = 2
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vr1f0"]
 content_margin_left = 16.0
-content_margin_top = 16.0
+content_margin_top = 10.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.1254902, 0.23137255, 0.34509805, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.81960785, 0.4, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 5
+content_margin_bottom = 15.0
+bg_color = Color(0.125, 0.231, 0.345, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 7
+border_color = Color(1, 0.82, 0.4, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 8
+shadow_offset = Vector2(0, 6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1dhk"]
 content_margin_left = 16.0
-content_margin_top = 16.0
+content_margin_top = 15.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.08627451, 0.16862746, 0.2627451, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(0.95686275, 0.6509804, 0.16470589, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 5
+content_margin_bottom = 10.0
+bg_color = Color(0.086, 0.169, 0.263, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.957, 0.651, 0.165, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 2
+shadow_offset = Vector2(0, 2)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5egv6"]
 content_margin_left = 16.0
-content_margin_top = 16.0
+content_margin_top = 10.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
-bg_color = Color(0.19215687, 0.35686275, 0.5019608, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-border_color = Color(1, 0.8862745, 0.6392157, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 5
+content_margin_bottom = 15.0
+bg_color = Color(0.192, 0.357, 0.502, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 7
+border_color = Color(1, 0.886, 0.639, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0, 0, 0, 0.35)
+shadow_size = 10
+shadow_offset = Vector2(0, 7)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vtepg"]
 content_margin_left = 16.0
-content_margin_top = 16.0
+content_margin_top = 10.0
 content_margin_right = 16.0
-content_margin_bottom = 16.0
+content_margin_bottom = 15.0
 bg_color = Color(0.1254902, 0.23137255, 0.34509805, 1)
 draw_center = false
 border_width_left = 3
@@ -159,15 +210,14 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 3
 border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 12
-corner_radius_top_right = 12
-corner_radius_bottom_right = 12
-corner_radius_bottom_left = 12
-corner_detail = 5
-expand_margin_left = 2.0
-expand_margin_top = 2.0
-expand_margin_right = 2.0
-expand_margin_bottom = 2.0
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
 
 [node name="MainMenu" type="Control" unique_id=1444892418]
 layout_mode = 3
@@ -176,6 +226,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("5_fx")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1206791130]
 layout_mode = 1
@@ -184,24 +235,139 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.0627451, 0.10980392, 0.19215687, 1)
 
+[node name="Backdrop" type="TextureRect" parent="." unique_id=1512767923]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_sky")
+expand_mode = 1
+
+[node name="Stars" type="CPUParticles2D" parent="." unique_id=1973410244]
+position = Vector2(576, 324)
+amount = 90
+lifetime = 4.0
+preprocess = 4.0
+lifetime_randomness = 0.6
+emission_shape = 3
+emission_rect_extents = Vector2(576, 324)
+direction = Vector2(0, 0)
+gravity = Vector2(0, 0)
+scale_amount_min = 2.0
+scale_amount_max = 5.0
+color = Color(0.86, 0.92, 1, 1)
+color_ramp = SubResource("Gradient_star")
+
+[node name="MoonGlowOuter" type="Polygon2D" parent="." unique_id=579027042]
+position = Vector2(110, 96)
+color = Color(0.9, 0.93, 1, 0.06)
+polygon = PackedVector2Array(88, 0, 86.9, 13.8, 83.7, 27.2, 78.4, 40, 71.2, 51.7, 62.2, 62.2, 51.7, 71.2, 40, 78.4, 27.2, 83.7, 13.8, 86.9, 0, 88, -13.8, 86.9, -27.2, 83.7, -40, 78.4, -51.7, 71.2, -62.2, 62.2, -71.2, 51.7, -78.4, 40, -83.7, 27.2, -86.9, 13.8, -88, 0, -86.9, -13.8, -83.7, -27.2, -78.4, -40, -71.2, -51.7, -62.2, -62.2, -51.7, -71.2, -40, -78.4, -27.2, -83.7, -13.8, -86.9, 0, -88, 13.8, -86.9, 27.2, -83.7, 40, -78.4, 51.7, -71.2, 62.2, -62.2, 71.2, -51.7, 78.4, -40, 83.7, -27.2, 86.9, -13.8)
+
+[node name="MoonGlow" type="Polygon2D" parent="." unique_id=1452870201]
+position = Vector2(110, 96)
+color = Color(0.9, 0.93, 1, 0.1)
+polygon = PackedVector2Array(62, 0, 61.2, 9.7, 59, 19.2, 55.2, 28.1, 50.2, 36.4, 43.8, 43.8, 36.4, 50.2, 28.1, 55.2, 19.2, 59, 9.7, 61.2, 0, 62, -9.7, 61.2, -19.2, 59, -28.1, 55.2, -36.4, 50.2, -43.8, 43.8, -50.2, 36.4, -55.2, 28.1, -59, 19.2, -61.2, 9.7, -62, 0, -61.2, -9.7, -59, -19.2, -55.2, -28.1, -50.2, -36.4, -43.8, -43.8, -36.4, -50.2, -28.1, -55.2, -19.2, -59, -9.7, -61.2, 0, -62, 9.7, -61.2, 19.2, -59, 28.1, -55.2, 36.4, -50.2, 43.8, -43.8, 50.2, -36.4, 55.2, -28.1, 59, -19.2, 61.2, -9.7)
+
+[node name="Moon" type="Polygon2D" parent="." unique_id=1457815506]
+position = Vector2(110, 96)
+color = Color(0.97, 0.94, 0.82, 1)
+polygon = PackedVector2Array(40, 0, 39.5, 6.3, 38, 12.4, 35.6, 18.2, 32.4, 23.5, 28.3, 28.3, 23.5, 32.4, 18.2, 35.6, 12.4, 38, 6.3, 39.5, 0, 40, -6.3, 39.5, -12.4, 38, -18.2, 35.6, -23.5, 32.4, -28.3, 28.3, -32.4, 23.5, -35.6, 18.2, -38, 12.4, -39.5, 6.3, -40, 0, -39.5, -6.3, -38, -12.4, -35.6, -18.2, -32.4, -23.5, -28.3, -28.3, -23.5, -32.4, -18.2, -35.6, -12.4, -38, -6.3, -39.5, 0, -40, 6.3, -39.5, 12.4, -38, 18.2, -35.6, 23.5, -32.4, 28.3, -28.3, 32.4, -23.5, 35.6, -18.2, 38, -12.4, 39.5, -6.3)
+
+[node name="HillBack" type="Polygon2D" parent="." unique_id=1744934443]
+color = Color(0.1, 0.19, 0.33, 1)
+polygon = PackedVector2Array(0, 576.1, 32, 580, 64, 583.5, 96, 586.5, 128, 588.9, 160, 590.6, 192, 591.7, 224, 592, 256, 591.6, 288, 590.5, 320, 588.6, 352, 586.2, 384, 583.2, 416, 579.6, 448, 575.7, 480, 571.6, 512, 567.2, 544, 562.8, 576, 558.6, 608, 554.5, 640, 550.7, 672, 547.4, 704, 544.6, 736, 542.5, 768, 540.9, 800, 540.1, 832, 540.1, 864, 540.7, 896, 542.1, 928, 544.1, 960, 546.8, 992, 550, 1024, 553.7, 1056, 557.7, 1088, 561.9, 1120, 566.3, 1152, 570.7, 1152, 648, 0, 648)
+
+[node name="HillFront" type="Polygon2D" parent="." unique_id=182138652]
+color = Color(0.06, 0.11, 0.2, 1)
+polygon = PackedVector2Array(0, 617.5, 32, 619.1, 64, 619.9, 96, 619.9, 128, 619.1, 160, 617.5, 192, 615.1, 224, 612.2, 256, 608.9, 288, 605.3, 320, 601.7, 352, 598.2, 384, 594.9, 416, 592.2, 448, 590.1, 480, 588.6, 512, 588, 544, 588.2, 576, 589.3, 608, 591.1, 640, 593.5, 672, 596.6, 704, 600, 736, 603.6, 768, 607.2, 800, 610.7, 832, 613.8, 864, 616.4, 896, 618.4, 928, 619.6, 960, 620, 992, 619.6, 1024, 618.3, 1056, 616.4, 1088, 613.7, 1120, 610.6, 1152, 607.1, 1152, 648, 0, 648)
+
+[node name="Decor" type="Node2D" parent="." unique_id=717718701]
+
+[node name="Slingshot" type="Sprite2D" parent="Decor" unique_id=576705812]
+position = Vector2(170, 462)
+scale = Vector2(0.36, 0.36)
+texture = ExtResource("6_sling")
+
+[node name="Player" type="Sprite2D" parent="Decor" unique_id=433533020]
+position = Vector2(170, 286)
+scale = Vector2(0.45, 0.45)
+texture = ExtResource("7_icon")
+
+[node name="UFO" type="Sprite2D" parent="Decor" unique_id=525562485]
+position = Vector2(965, 140)
+scale = Vector2(0.16, 0.16)
+texture = ExtResource("8_ufo")
+
+[node name="Balloon" type="Sprite2D" parent="Decor" unique_id=1809193929]
+position = Vector2(1020, 430)
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("10_balloon")
+
+[node name="Coins" type="Node2D" parent="Decor" unique_id=905013591]
+
+[node name="Coin1" type="Sprite2D" parent="Decor/Coins" unique_id=1988639938]
+position = Vector2(240, 335)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_coin")
+hframes = 6
+
+[node name="Coin2" type="Sprite2D" parent="Decor/Coins" unique_id=1125943009]
+position = Vector2(272, 292)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_coin")
+hframes = 6
+
+[node name="Coin3" type="Sprite2D" parent="Decor/Coins" unique_id=1005721081]
+position = Vector2(306, 252)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_coin")
+hframes = 6
+
+[node name="Coin4" type="Sprite2D" parent="Decor/Coins" unique_id=529468589]
+position = Vector2(880, 300)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_coin")
+hframes = 6
+
+[node name="Coin5" type="Sprite2D" parent="Decor/Coins" unique_id=1105142440]
+position = Vector2(915, 342)
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("9_coin")
+hframes = 6
+
 [node name="TextureRect" type="TextureRect" parent="." unique_id=1464875208]
-modulate = Color(0.8392157, 0.8862745, 0.9490196, 1)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -450.0
-offset_top = -300.0
-offset_right = 450.0
-offset_bottom = 300.0
+offset_left = -470.0
+offset_top = -310.0
+offset_right = 470.0
+offset_bottom = 310.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("1_fu7sn")
+mouse_filter = 2
 expand_mode = 1
+
+[node name="PanelBg" type="Panel" parent="TextureRect" unique_id=2016594926]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8dnnj")
 
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect" unique_id=1633760618]
 layout_mode = 1
@@ -219,14 +385,33 @@ theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TextureRect/MarginContainer" unique_id=2074371038]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 14
+alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=376501209]
 layout_mode = 2
 
 [node name="Control" type="Control" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1597647652]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(120, 60)
 layout_mode = 2
+
+[node name="PodiumIcon" type="TextureRect" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer/Control" unique_id=1058525587]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0
+offset_top = -30.0
+offset_right = 10.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("11_podium")
+expand_mode = 1
+stretch_mode = 5
 
 [node name="Control2" type="Control" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1949488030]
 layout_mode = 2
@@ -236,8 +421,13 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
-theme_override_colors/font_color = Color(1, 0.81960785, 0.4, 1)
-theme_override_font_sizes/font_size = 48
+theme_override_colors/font_color = Color(1, 0.82, 0.4, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.45)
+theme_override_colors/font_outline_color = Color(0.16, 0.05, 0.22, 1)
+theme_override_constants/shadow_offset_y = 6
+theme_override_constants/outline_size = 14
+theme_override_fonts/font = SubResource("FontVariation_title")
+theme_override_font_sizes/font_size = 88
 text = "TOP DOGG"
 
 [node name="Control3" type="Control" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer" unique_id=390266051]
@@ -246,7 +436,7 @@ size_flags_horizontal = 3
 
 [node name="Control4" type="Control" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1251094439]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
 
 [node name="BackButton" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1880483883]
@@ -254,18 +444,26 @@ unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(120, 56)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.09803922, 0.14117648, 0.22745098, 1)
+theme_override_colors/font_color = Color(0.098, 0.141, 0.227, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.098, 0.141, 0.227, 1)
+theme_override_fonts/font = SubResource("FontVariation_ui")
 theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = SubResource("StyleBoxTexture_glbon")
+theme_override_styles/normal = SubResource("StyleBoxFlat_opfnp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cp0ys")
+theme_override_styles/hover = SubResource("StyleBoxFlat_yhxw7")
+theme_override_styles/focus = SubResource("StyleBoxFlat_trj04")
 text = "Back"
 script = ExtResource("3_nlkkf")
 
 [node name="MenuTagline" type="Label" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=1788461660]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 28)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.90588236, 0.93333334, 0.972549, 1)
-theme_override_font_sizes/font_size = 16
+theme_override_colors/font_color = Color(0.72, 0.82, 0.98, 1)
+theme_override_fonts/font = SubResource("FontVariation_ui")
+theme_override_font_sizes/font_size = 20
 text = "RUN FAST  •  CLIMB THE PACK"
 horizontal_alignment = 1
 
@@ -274,12 +472,13 @@ layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="PlayButton" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=360913724 groups=["PlayButton"]]
-custom_minimum_size = Vector2(200, 70)
+custom_minimum_size = Vector2(300, 84)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.09803922, 0.14117648, 0.22745098, 1)
+theme_override_colors/font_color = Color(0.098, 0.141, 0.227, 1)
 theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.09803922, 0.14117648, 0.22745098, 1)
-theme_override_font_sizes/font_size = 36
+theme_override_colors/font_hover_color = Color(0.098, 0.141, 0.227, 1)
+theme_override_fonts/font = SubResource("FontVariation_ui")
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_opfnp")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_cp0ys")
 theme_override_styles/hover = SubResource("StyleBoxFlat_yhxw7")
@@ -289,13 +488,22 @@ script = ExtResource("1_06t4h")
 
 [node name="Leaderboard" type="TextureRect" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2" unique_id=2053999875 groups=["Leaderboard"]]
 visible = false
-custom_minimum_size = Vector2(700, 500)
+custom_minimum_size = Vector2(780, 480)
 layout_mode = 2
 size_flags_horizontal = 3
-texture = ExtResource("3_glbon")
 expand_mode = 1
 script = ExtResource("4_glbon")
 leaderboard_internal_name = "top scores"
+
+[node name="BoardBg" type="Panel" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard" unique_id=1164827540]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_board")
 
 [node name="MarginContainer" type="MarginContainer" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard" unique_id=290712747]
 layout_mode = 1
@@ -304,46 +512,55 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 60
-theme_override_constants/margin_top = 60
-theme_override_constants/margin_right = 60
-theme_override_constants/margin_bottom = 60
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 18
 
 [node name="LeaderboardInput" type="VBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer" unique_id=1985562685]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
-theme_override_constants/separation = 14
+theme_override_constants/separation = 8
 
-[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput" unique_id=1527658488]
+[node name="HeaderMargin" type="MarginContainer" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput" unique_id=1149410061]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_right = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput/HeaderMargin" unique_id=1527658488]
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="RankingText" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput/HBoxContainer" unique_id=161432136]
-custom_minimum_size = Vector2(64, 34)
+[node name="RankingText" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput/HeaderMargin/HBoxContainer" unique_id=161432136]
+custom_minimum_size = Vector2(64, 30)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.09019608, 0.15686275, 0.23921569, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.82, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_ui")
+theme_override_font_sizes/font_size = 16
 text = "RANK"
-label_settings = SubResource("LabelSettings_glbon")
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="UsernameText" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput/HBoxContainer" unique_id=1003307568]
-custom_minimum_size = Vector2(240, 34)
+[node name="UsernameText" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput/HeaderMargin/HBoxContainer" unique_id=1003307568]
+custom_minimum_size = Vector2(240, 30)
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_colors/font_color = Color(0.09019608, 0.15686275, 0.23921569, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.82, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_ui")
+theme_override_font_sizes/font_size = 16
 text = "RUNNER"
-label_settings = SubResource("LabelSettings_nlkkf")
+vertical_alignment = 1
 
-[node name="DistanceText" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput/HBoxContainer" unique_id=1315818882]
-custom_minimum_size = Vector2(120, 34)
+[node name="DistanceText" type="Label" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput/HeaderMargin/HBoxContainer" unique_id=1315818882]
+custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
-theme_override_colors/font_color = Color(0.09019608, 0.15686275, 0.23921569, 1)
-theme_override_font_sizes/font_size = 18
+theme_override_colors/font_color = Color(1, 0.82, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_ui")
+theme_override_font_sizes/font_size = 16
 text = "DISTANCE"
-label_settings = SubResource("LabelSettings_qe12f")
 horizontal_alignment = 2
+vertical_alignment = 1
 
 [node name="HSeparator" type="HSeparator" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput" unique_id=539128730]
 layout_mode = 2
@@ -353,27 +570,33 @@ theme_override_styles/separator = SubResource("StyleBoxLine_16hvj")
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
 [node name="Entries" type="VBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer2/Leaderboard/MarginContainer/LeaderboardInput/ScrollContainer" unique_id=449752708]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(20, 20)
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_constants/separation = 6
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="TextureRect/MarginContainer/VBoxContainer" unique_id=672234204 groups=["LeaderboardButton"]]
 layout_mode = 2
 size_flags_horizontal = 4
 
 [node name="LeaderboardButton" type="Button" parent="TextureRect/MarginContainer/VBoxContainer/HBoxContainer3" unique_id=1614682880 groups=["LeaderboardButton"]]
-custom_minimum_size = Vector2(300, 66)
+custom_minimum_size = Vector2(300, 70)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.972549, 0.9607843, 0.9254902, 1)
 theme_override_colors/font_pressed_color = Color(1, 0.81960785, 0.4, 1)
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 36
+theme_override_constants/h_separation = 12
+theme_override_constants/icon_max_width = 44
+theme_override_fonts/font = SubResource("FontVariation_ui")
+theme_override_font_sizes/font_size = 32
 theme_override_styles/normal = SubResource("StyleBoxFlat_vr1f0")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_t1dhk")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5egv6")
 theme_override_styles/focus = SubResource("StyleBoxFlat_vtepg")
 text = "Leaderboard"
+icon = ExtResource("11_podium")
 script = ExtResource("2_7vrkn")
